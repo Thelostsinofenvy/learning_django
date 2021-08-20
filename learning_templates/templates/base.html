@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <title>Template Inheritence</title>
+  </head>
+  <body>
+    <!-- this is the base template-->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <ul class="nav navbar-brand">
+          <li><a class="navbar-brand" href="{% url 'index' %}">Django</a></li>
+
+          <li>
+            <a class="navbar-link" href="{% url 'admin:index' %}">Admin</a>
+          </li>
+          &nbsp; &nbsp; &nbsp;
+          <li>
+            <a class="navbar-link" href="{% url 'registration' %}">Register</a>
+          </li>
+          &nbsp; &nbsp; {% if user.is_authenticated %}
+          <li>
+            <a class="navbar-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li>
+            <a class="navbar-link" href="{% url 'user_login' %}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- everything outside this block get inherited-->
+    <div class="container">{% block body_block%} {% endblock%}</div>
+  </body>
+</html>
