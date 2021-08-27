@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.base import Model
 from django.db.models.deletion import CASCADE
-from django.db.models.fields.related import ForeignKey
+from django.urls import reverse
 
 
 # Create your models here.
@@ -12,6 +12,9 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('basic_app:detail', kwargs={'pk': self.pk})
 
 
 class Student(models.Model):
